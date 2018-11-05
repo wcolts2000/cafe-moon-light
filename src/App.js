@@ -18,13 +18,29 @@ class App extends Component {
 
 
   render() {
+    let filterData = data;
+
+    if (this.state.filterTerm !== '') {
+      filterData = filterData.filter(dish => {
+        let titleMatch = dish.title
+          .toLowerCase()
+          .includes(this.state.filterTerm.toLowerCase());
+
+          let ingredientMatch = dish.ingredients.some(ingredient => {
+            return ingredient.toLowerCase().includes(this.state.filterTerm.toLowerCase());
+          });
+
+          return titleMatch || ingredientMatch;
+      });
+    }
+
     return (
       <div className="App">
         <Header />
         <SearchBar value={this.state.filterTerm}
         handleInputChange={this.handleInputChange}
         />
-        <DishGrid data={data} />
+        <DishGrid data={filterData} />
       </div>
     );
   }

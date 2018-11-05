@@ -9,7 +9,7 @@ const DishGrid = props => {
       <div className="container">
         {props.data.map(dish => (
           <Dish dish={dish}/>
-        ))};
+        ))}
     </div>
   </div>
   );
